@@ -23,6 +23,10 @@ node ("master") {
 		Regards,
 		Pooja''', compressLog: true, recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'Build is successful', to: 'pbansal13@sapient.com'
    		//echo 'Hello World 2'
+		
+		stage 'Deploy'
+		puppet.credentials 'secret'
+		puppet.codeDeploy 'production', credentials: 'secret'
 
 	
    //stage 'Artifactory upload'
