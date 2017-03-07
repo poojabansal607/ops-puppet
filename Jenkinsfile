@@ -32,7 +32,7 @@ node ("master") {
      stage 'Artifactory upload'
      def server = Artifactory.server 'art-1'
     def rtMaven = Artifactory.newMavenBuild()
-     rtMaven.tool = M3
+     rtMaven.tool = tool 'M3'
     rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
     rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
     def buildInfo = Artifactory.newBuildInfo()
