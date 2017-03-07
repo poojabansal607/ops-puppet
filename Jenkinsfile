@@ -38,7 +38,7 @@ node ("master") {
 	def uploadSpec = """{
 	  "files": [
 	  {
-	    "pattern": "/var/lib/jenkins/jobs/gs-rest-service-cors/workspace/target/gs-rest-service-cors-0.1.0.jar"
+	    "pattern": "/var/lib/jenkins/jobs/gs-rest-service-cors/workspace/target/gs-rest-service-cors-0.1.0.jar",
 		"target": "generic-repo/"
 	  }
 	  ]
@@ -53,8 +53,8 @@ node ("master") {
 	
 	
    
-    stage 'Publish build info'
-      server.publishBuildInfo buildInfo
+    //stage 'Publish build info'
+     // server.publishBuildInfo buildInfo
 	  //Set the Jenkins credentials that hold our Puppet Enterprise RBAC token
 	//  puppet.credentials 'SecretID'
 
