@@ -35,10 +35,23 @@ node ("master") {
      rtMaven.tool = tool 'M3'
     rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
     rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
+	def uploadSpec = """{
+	  "files": [
+	  {
+	    "pattern": "/var/lib/jenkins/jobs/gs-rest-service-cors/workspace/target/gs-rest-service-cors-0.1.0.jar"
+		"target": "generic-repo/"
+	  }
+	  ]
+	  }"""
+	  server.upload(uploadSpec)
+	  
+	  
+	  
     def buildInfo = Artifactory.newBuildInfo()
+	server.upload(artifactoryUploadDsl, buildInfo)
+    server.publishBuildInfo(buildInfo)
 	
-	stage 'Exec Maven'
-	    rtMaven.run pom: 'test-app/pom.xml', goals: 'clean install', buildInfo: buildInfo
+	
    
     stage 'Publish build info'
       server.publishBuildInfo buildInfo
