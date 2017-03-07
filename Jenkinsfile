@@ -24,21 +24,24 @@ node ("master") {
 		Pooja''', compressLog: true, recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'Build is successful', to: 'pbansal13@sapient.com'
    		//echo 'Hello World 2'
 		
-		stage 'Deploy'
-		puppet.credentials 'secret'
-		puppet.codeDeploy 'production', credentials: 'secret'
+		//stage 'Deploy'
+//puppet.credentials 'secret'
+		//puppet.codeDeploy 'production', credentials: 'secret'
 
 	
-   //stage 'Artifactory upload'
-   //def server = Artifactory.server('art-1')
-   //def rtMaven = Artifactory.newMavenBuild()
-   //rtMaven.tool = M3
-   //rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
-   //rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
-   //def buildInfo = Artifactory.newBuildInfo()
+     stage 'Artifactory upload'
+     def server = Artifactory.server 'art-1'
+    def rtMaven = Artifactory.newMavenBuild()
+     rtMaven.tool = M3
+    rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
+    rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
+    def buildInfo = Artifactory.newBuildInfo()
+	
+	stage 'Exec Maven'
+	    rtMaven.run pom: 'test-app/pom.xml', goals: 'clean install', buildInfo: buildInfo
    
-   //stage 'Publish build info'
-      //server.publishBuildInfo buildInfo
+    stage 'Publish build info'
+      server.publishBuildInfo buildInfo
 	  //Set the Jenkins credentials that hold our Puppet Enterprise RBAC token
 	//  puppet.credentials 'SecretID'
 
