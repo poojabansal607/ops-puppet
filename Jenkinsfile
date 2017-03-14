@@ -1,5 +1,21 @@
+#!/usr/bin/env groovy
+ 
+/**
+        * Sample Jenkinsfile for Jenkins2 Pipeline
+        * from https://github.com/hotwilson/jenkins2/edit/master/Jenkinsfile
+        * by wilsonmar@gmail.com 
+ */
+ 
+import hudson.model.*
+import hudson.EnvVars
+import groovy.json.JsonSlurperClassic
+import groovy.json.JsonBuilder
+import groovy.json.JsonOutput
+import java.net.URL
+ 
+
 node ("master") {
-   stage 'Checkout'
+   stage '\u2776 Checkout'
        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'poojabansal607@gmail.com', url: 'https://github.com/poojabansal607/test-app.git']]])
        def mvnHome = tool 'M3'
    		//echo 'Hello World 1'
@@ -8,16 +24,14 @@ node ("master") {
 	  // def pom = readMavenPom file: 'pom.xml'
 	  // def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
 	   sh "${mvnHome}/bin/mvn clean install"
-	   echo 'pass'
-	   echo '${BUILD_URL}'
-	 //  archiveArtifacts '/var/lib/jenkins/jobs/order-test/workspace/ordermanagementui/target/order-management-1.0-SNAPSHOT.war'
+	  
+	 
 	 step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
 	 step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
-	 //  sh "cd /var/lib/jenkins/.m2/repository/com/sape/order/order-management-ui/1.0-SNAPSHOT"
-	   echo 'pass1'
-	  // sh "cp -r order-management-1.0-SNAPSHOT.war /var"
-	  // echo 'pass2'
-      // sh ''/usr/share/mvn' clean install' 
+	 echo "\u2600 BUILD_URL=${env.BUILD_URL}"
+	
+	 def workspace = pwd()
+     echo "\u2600 workspace=${workspace}"
 	   // input 'Publish?'
 	     // Email for build 
 	    emailext body: '''Hi,
