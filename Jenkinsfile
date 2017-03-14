@@ -1,25 +1,11 @@
-#!/usr/bin/env groovy
- 
-/**
-        * Sample Jenkinsfile for Jenkins2 Pipeline
-        * from https://github.com/hotwilson/jenkins2/edit/master/Jenkinsfile
-        * by wilsonmar@gmail.com 
- */
- 
-import hudson.model.*
-import hudson.EnvVars
-import groovy.json.JsonSlurperClassic
-import groovy.json.JsonBuilder
-import groovy.json.JsonOutput
-import java.net.URL
- 
+
 
 node ("master") {
    stage '\u2776 Checkout'
        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'poojabansal607@gmail.com', url: 'https://github.com/poojabansal607/test-app.git']]])
        def mvnHome = tool 'M3'
    		//echo 'Hello World 1'
-   stage 'Build'
+   stage '\u2777 Build'
       
 	  // def pom = readMavenPom file: 'pom.xml'
 	  // def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
