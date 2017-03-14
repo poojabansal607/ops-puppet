@@ -19,7 +19,7 @@ node ("master") {
 	 echo "buildtest=${BUILD_NUMBER}/artifact/target/"
 	 	
 	// echo "BUILD_URL=${env.BUILD_URL}/artifact/target/gs-rest-service-cors.jar"
-	 sh "cp -rf ${BUILD_NUMBER}/artifact/target/gs-rest-service-cors-0.1.0.jar /var"
+	 sh "cp -rf BUILD_URL/artifact/target/gs-rest-service-cors-0.1.0.jar /var"
 		
 	// def workspace = pwd()
    //  echo "workspace=${workspace}"
