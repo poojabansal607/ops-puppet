@@ -1,11 +1,9 @@
-
-
 node ("master") {
-   stage '\u2776 Checkout'
+   stage 'Checkout'
        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'poojabansal607@gmail.com', url: 'https://github.com/poojabansal607/test-app.git']]])
        def mvnHome = tool 'M3'
-   		//echo 'Hello World 1'
-   stage '\u2777 Build'
+   		
+     stage 'Build'
       
 	  // def pom = readMavenPom file: 'pom.xml'
 	  // def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
@@ -17,7 +15,7 @@ node ("master") {
 	 echo "\u2600 BUILD_URL=${env.BUILD_URL}"
 	
 	 def workspace = pwd()
-     echo "\u2600 workspace=${workspace}"
+     echo "workspace=${workspace}"
 	   // input 'Publish?'
 	     // Email for build 
 	    emailext body: '''Hi,
