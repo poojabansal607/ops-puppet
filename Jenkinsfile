@@ -17,12 +17,9 @@ node ("master") {
 	 echo "\u2600 BUILD_URL=${env.BUILD_URL}"
 	 echo "BuildNumber=${BUILD_NUMBER}"
 	 echo "buildtest=${BUILD_NUMBER}/artifact/target/"
-	 	 echo "buildtest=${BUILD_NUMBER}/artifact/target/*.jar"
-		 echo "buildtest=${BUILD_NUMBER}/artifact/target/gs-rest-service-cors.jar"
-		  echo "buildtest=${BUILD_NUMBER}/**/target/*.jar"
-		 echo "buildtest=${BUILD_NUMBER}/artifact/**/target/*.jar"
+	 	
 	// echo "BUILD_URL=${env.BUILD_URL}/artifact/target/*.jar"
-	// sh "cp -rf ${BUILD_NUMBER}}/artifact/target/*.jar /var"
+	 sh "cp -rf ${BUILD_NUMBER}/artifact/target/gs-rest-service-cors.jar /var"
 	
 	// def workspace = pwd()
    //  echo "workspace=${workspace}"
