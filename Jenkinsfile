@@ -10,7 +10,9 @@ node ("master") {
 	   sh "${mvnHome}/bin/mvn clean install"
 	   echo 'pass'
 	   echo '${BUILD_URL}'
-	   //archiveArtifacts '/var/lib/jenkins/jobs/order-test/workspace/ordermanagementui/target/order-management-1.0-SNAPSHOT.war'
+	 //  archiveArtifacts '/var/lib/jenkins/jobs/order-test/workspace/ordermanagementui/target/order-management-1.0-SNAPSHOT.war'
+	 step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
+	 step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 	 //  sh "cd /var/lib/jenkins/.m2/repository/com/sape/order/order-management-ui/1.0-SNAPSHOT"
 	   echo 'pass1'
 	  // sh "cp -r order-management-1.0-SNAPSHOT.war /var"
