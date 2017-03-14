@@ -24,54 +24,17 @@ node ("master") {
 		Pooja''', compressLog: true, recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'Build is successful', to: 'pbansal13@sapient.com'
    		//echo 'Hello World 2'
 		
-		 stage 'Deploy'
+		 stage 'Deploy to QA'
          puppet.credentials 'secret'
 		 puppet.codeDeploy 'production', credentials: 'secret'
 
-	
-    // stage 'Artifactory upload'
-     //def server = Artifactory.server 'art-1'
-    //def rtMaven = Artifactory.newMavenBuild()
-     //rtMaven.tool = tool 'M3'
-    //rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
-   // rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
-  //	def uploadSpec = """{
-	//  "files": [
-	 // {
-	   // "pattern": "/var/lib/jenkins/jobs/gs-rest-service-cors/workspace/target/gs-rest-service-cors-0.1.0.jar",
-		//"target": "generic-repo/"
-	 // }
-	 // ]
-	  //}"""
-	  //server.upload(uploadSpec)
-	  
-	  
-	  
-    //def buildInfo = Artifactory.newBuildInfo()
-	//server.upload(artifactoryUploadDsl, buildInfo)
-    //server.publishBuildInfo(buildInfo)
-	
-	
-   
-    //stage 'Publish build info'
-     // server.publishBuildInfo buildInfo
-	  //Set the Jenkins credentials that hold our Puppet Enterprise RBAC token
-	//  puppet.credentials 'SecretID'
 
-  // stage 'Deploy to dev'
-// input "Ready to deploy to Dev?"
+    stage 'Deploy to PROD'
+    input "Ready to deploy to PROD?"
 //	puppet.hiera scope: 'staging', key: 'build-version', value: version
 //	puppet.hiera scope: 'staging', key: 'build-path', value: "http://" + hostaddress + "/builds/app/build-${version}.tar.gz"
-//	echo 'Hello World 4'
 //  puppet.codeDeploy 'production', credentials: 'SecretID'
    
    
-   stage 'Run Acceptance tests'
-        echo 'Hello World 5'
-   stage 'Run Jmeter Tests'
-        echo 'Hello World 6'
-   stage 'Nexus'
-         echo 'Hello World 7'
-   stage 'Deployment to UAT'
-         echo 'Hello World 8'			 
+		 
 } 
