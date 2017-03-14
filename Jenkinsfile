@@ -14,15 +14,15 @@ node ("master") {
 	 step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 	// step([$class: 'CopyArtifact', filter: '**/target/*.jar', fingerprintArtifacts: true, flatten: true, projectName: 'gs-rest-service-cors', selector: //[$class: 'SpecificBuildSelector', buildNumber: '${BUILD_NUMBER}'], target: '/var'])
 
-	 echo "\u2600 BUILD_URL=${env.BUILD_URL}"
-	 echo "BuildNumber=${BUILD_NUMBER}"
-	 echo "buildtest=${BUILD_NUMBER}/artifact/target/"
+	 //echo "\u2600 BUILD_URL=${env.BUILD_URL}"
+	 //echo "BuildNumber=${BUILD_NUMBER}"
+	// echo "buildtest=${BUILD_NUMBER}/artifact/target/"
 	 	
 	// echo "BUILD_URL=${env.BUILD_URL}/artifact/target/gs-rest-service-cors.jar"
-	 sh "cp -rf ${env.BUILD_URL}artifact/target/gs-rest-service-cors-0.1.0.jar /var"
+	// sh "cp -rf ${env.BUILD_URL}artifact/target/gs-rest-service-cors-0.1.0.jar /var"
 		
-	// def workspace = pwd()
-   //  echo "workspace=${workspace}"
+	 def workspace = pwd()
+    echo "workspace=${workspace}"
 	//   // input 'Publish?'
 	     // Email for build 
 	  //  emailext body: '''Hi,
@@ -31,13 +31,13 @@ node ("master") {
 		//Pooja''', compressLog: true, recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'Build is successful', to: 'pbansal13@sapient.com'
    		//echo 'Hello World 2'
 		
-		// stage 'Deploy to QA'
-       //  puppet.credentials 'secret'
-		// puppet.codeDeploy 'production', credentials: 'secret'
+		 stage 'Deploy to QA'
+       puppet.credentials 'secret'
+		 puppet.codeDeploy 'production', credentials: 'secret'
 
 
-  //  stage 'Deploy to PROD'
-  //  input "Ready to deploy to PROD?"
+    stage 'Deploy to PROD'
+   input "Ready to deploy to PROD?"
 //	puppet.hiera scope: 'staging', key: 'build-version', value: version
 //	puppet.hiera scope: 'staging', key: 'build-path', value: "http://" + hostaddress + "/builds/app/build-${version}.tar.gz"
 //  puppet.codeDeploy 'production', credentials: 'SecretID'
