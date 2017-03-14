@@ -24,32 +24,32 @@ node ("master") {
 		Pooja''', compressLog: true, recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'Build is successful', to: 'pbansal13@sapient.com'
    		//echo 'Hello World 2'
 		
-		//stage 'Deploy'
-//puppet.credentials 'secret'
-		//puppet.codeDeploy 'production', credentials: 'secret'
+		 stage 'Deploy'
+         puppet.credentials 'secret'
+		 puppet.codeDeploy 'production', credentials: 'secret'
 
 	
-     stage 'Artifactory upload'
-     def server = Artifactory.server 'art-1'
-    def rtMaven = Artifactory.newMavenBuild()
-     rtMaven.tool = tool 'M3'
-    rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
-    rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
-	def uploadSpec = """{
-	  "files": [
-	  {
-	    "pattern": "/var/lib/jenkins/jobs/gs-rest-service-cors/workspace/target/gs-rest-service-cors-0.1.0.jar",
-		"target": "generic-repo/"
-	  }
-	  ]
-	  }"""
-	  server.upload(uploadSpec)
+    // stage 'Artifactory upload'
+     //def server = Artifactory.server 'art-1'
+    //def rtMaven = Artifactory.newMavenBuild()
+     //rtMaven.tool = tool 'M3'
+    //rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
+   // rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
+  //	def uploadSpec = """{
+	//  "files": [
+	 // {
+	   // "pattern": "/var/lib/jenkins/jobs/gs-rest-service-cors/workspace/target/gs-rest-service-cors-0.1.0.jar",
+		//"target": "generic-repo/"
+	 // }
+	 // ]
+	  //}"""
+	  //server.upload(uploadSpec)
 	  
 	  
 	  
-    def buildInfo = Artifactory.newBuildInfo()
-	server.upload(artifactoryUploadDsl, buildInfo)
-    server.publishBuildInfo(buildInfo)
+    //def buildInfo = Artifactory.newBuildInfo()
+	//server.upload(artifactoryUploadDsl, buildInfo)
+    //server.publishBuildInfo(buildInfo)
 	
 	
    
