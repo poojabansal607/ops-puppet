@@ -12,9 +12,11 @@ node ("master") {
 	 
 	 step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
 	 step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+	 step([$class: 'CopyArtifact', filter: '**/target/*.jar', fingerprintArtifacts: true, flatten: true, projectName: 'gs-rest-service-cors', selector: [$class: 'SpecificBuildSelector', buildNumber: '${BUILD_NUMBER}'], target: './var'])
+
 	 echo "\u2600 BUILD_URL=${env.BUILD_URL}"
 	 echo "BUILD_URL=${env.BUILD_URL}/artifact/target/*.jar"
-	 sh "cp -r ${env.BUILD_URL}/artifact/target/*.jar /var"
+	// sh "cp -r ${env.BUILD_URL}/artifact/target/*.jar /var"
 	
 	 def workspace = pwd()
      echo "workspace=${workspace}"
