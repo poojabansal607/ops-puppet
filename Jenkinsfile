@@ -13,9 +13,8 @@ stage 'Build'
 	   
 	   def workspace = pwd()
        echo "workspace=${workspace}"
-	   sh "sshpass -p devop@123 -o 'StrictHostKeyChecking no' scp -r /var/lib/jenkins/jobs/gs-rest-service-cors/builds/lastSuccessfulBuild/archive/target/gs-rest-service-cors-0.1.0.jar root@del2vmpldevop02.sapient.com:/etc/puppetlabs/puppet/deploy_files/gs-service/target"
-	   
-	  // sh "cp /var/lib/jenkins/jobs/gs-rest-service-cors/builds/lastSuccessfulBuild/archive/target/gs-rest-service-cors-0.1.0.jar /tmp/"
+	  
+	   sh "cp /var/lib/jenkins/jobs/gs-rest-service-cors/builds/lastSuccessfulBuild/archive/target/gs-rest-service-cors-0.1.0.jar /etc/puppetlabs/puppet/deploy_files/gs-service/target/"
 		
 //stage 'Deploy to QA'
   //     puppet.credentials 'secret'
