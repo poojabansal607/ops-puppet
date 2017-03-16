@@ -9,7 +9,7 @@ stage 'Build'
      
 	   sh "${mvnHome}/bin/mvn clean install"
 	   step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
-	   step([$class: 'JUnitResultArchiver', testResults: '**/etc/puppetlabs/puppet/deploy_files/gs-service/target/surefire-reports/TEST-*.xml'])		
+	   step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])		
 	   
 	   def workspace = pwd()
        echo "workspace=${workspace}"
