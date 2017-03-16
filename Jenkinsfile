@@ -14,7 +14,7 @@ stage 'Build'
 	   def workspace = pwd()
        echo "workspace=${workspace}"
 	   
-	   sh "cp /var/lib/jenkins/jobs/gs-rest-service-cors/builds/lastSuccessfulBuild/archive/target/gs-rest-service-cors-0.1.0.jar /home/files/target"
+	   sh "cp /var/lib/jenkins/jobs/gs-rest-service-cors/builds/lastSuccessfulBuild/archive/target/gs-rest-service-cors-0.1.0.jar /tmp/"
 		
 //stage 'Deploy to QA'
   //     puppet.credentials 'secret'
