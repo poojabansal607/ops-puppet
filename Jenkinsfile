@@ -15,7 +15,7 @@ stage 'Build'
        echo "workspace=${workspace}"
 	  
 	   sh "cp /var/lib/jenkins/jobs/gs-rest-service-cors/builds/lastSuccessfulBuild/archive/target/gs-rest-service-cors-0.1.0.jar /tmp/"
-	   sh "chmod -r 777 /etc/puppetlabs/puppet/deploy_files/gs-service/target/"
+	  // sh "chmod -r 777 /etc/puppetlabs/puppet/deploy_files/gs-service/target/"
 	   sh "cp /var/lib/jenkins/jobs/gs-rest-service-cors/builds/lastSuccessfulBuild/archive/target/gs-rest-service-cors-0.1.0.jar /etc/puppetlabs/puppet/deploy_files/gs-service/target/"
 		
 //stage 'Deploy to QA'
