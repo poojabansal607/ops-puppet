@@ -13,15 +13,17 @@ stage 'Build'
 	   
 	   def workspace = pwd()
        echo "workspace=${workspace}"
-		
-stage 'Deploy to QA'
-       puppet.credentials 'secret'
-	   echo "connection is made with puppet"
-	   puppet.codeDeploy 'production' 
-	   echo "Code Deployed"
 	   
-stage 'Deploy to PROD'
-       input "Ready to deploy to PROD?"	   
-} 
+	   sh "cp -rf /var/lib/jenkins/jobs/gs-rest-service-cors/builds/lastSuccessfulBuild/archive/target /home/files"
+		
+//stage 'Deploy to QA'
+  //     puppet.credentials 'secret'
+	//   echo "connection is made with puppet"
+	 //  puppet.codeDeploy 'production' 
+	  // echo "Code Deployed"
+	   
+//stage 'Deploy to PROD'
+    //   input "Ready to deploy to PROD?"	   
+// } 
 
 
