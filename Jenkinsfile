@@ -3,15 +3,16 @@ node ("master") {
        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'poojabansal607@gmail.com', url: 'https://github.com/poojabansal607/test-app.git']]])
        def mvnHome = tool 'M3'
    		
-     stage 'Build'
+     //stage 'Build'
       
 	  // def pom = readMavenPom file: 'pom.xml'
 	  // def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
-	   sh "${mvnHome}/bin/mvn clean install"
+	  // sh "${mvnHome}/bin/mvn clean install"
 	  
 	 
-	 step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
-	 step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+	// step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
+	// step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+	
 	// step([$class: 'CopyArtifact', filter: '**/target/*.jar', fingerprintArtifacts: true, flatten: true, projectName: 'gs-rest-service-cors', selector: //[$class: 'SpecificBuildSelector', buildNumber: '${BUILD_NUMBER}'], target: '/var'])
 
 	 //echo "\u2600 BUILD_URL=${env.BUILD_URL}"
@@ -19,10 +20,10 @@ node ("master") {
 	// echo "buildtest=${BUILD_NUMBER}/artifact/target/"
 	 	
 	// echo "BUILD_URL=${env.BUILD_URL}/artifact/target/gs-rest-service-cors.jar"
-	// sh "cp -rf ${env.BUILD_URL}artifact/target/gs-rest-service-cors-0.1.0.jar /var"
+	// sh "cp -rf ${env.BUILD_URL}artifact/target/gs-rest-service-cors-0.1.0.jar ${env.BUILD_URL}artifact/"
 		
-	 def workspace = pwd()
-    echo "workspace=${workspace}"
+	 //def workspace = pwd()
+//echo "workspace=${workspace}"
 	//   // input 'Publish?'
 	     // Email for build 
 	  //  emailext body: '''Hi,
@@ -33,7 +34,7 @@ node ("master") {
 		
 		 stage 'Deploy to QA'
        puppet.credentials 'secret'
-		 puppet.codeDeploy 'production', credentials: 'secret'
+	   puppet.codeDeploy 'production', credentials: 'secret'
 
 
     stage 'Deploy to PROD'
