@@ -6,14 +6,16 @@ stage 'Checkout'
        def mvnHome = tool 'M3'
    		
 stage 'Build'
-      
+      /etc/puppetlabs/puppet/deploy_files/gs-service/target
 	   sh "${mvnHome}/bin/mvn clean install"
 	   step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
-	   step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])		
+	   step([$class: 'JUnitResultArchiver', testResults: '**/etc/puppetlabs/puppet/deploy_files/gs-service/target/surefire-reports/TEST-*.xml'])		
 	   
 	   def workspace = pwd()
        echo "workspace=${workspace}"
 	  
+	   sh "cp /var/lib/jenkins/jobs/gs-rest-service-cors/builds/lastSuccessfulBuild/archive/target/gs-rest-service-cors-0.1.0.jar /tmp/"
+	   sh "chmod -r 777 /etc/puppetlabs/puppet/deploy_files/gs-service/target/"
 	   sh "cp /var/lib/jenkins/jobs/gs-rest-service-cors/builds/lastSuccessfulBuild/archive/target/gs-rest-service-cors-0.1.0.jar /etc/puppetlabs/puppet/deploy_files/gs-service/target/"
 		
 //stage 'Deploy to QA'
